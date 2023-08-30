@@ -1,0 +1,28 @@
+/* -------------------------------- 
+# START CONFIGURATION
+-------------------------------- */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+/* -------------------------------- 
+# FOOTER
+-------------------------------- */
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -50px;
+}
+#footer,
+.push {
+  height: 50px;
+}
+/* -------------------------------- 
+# BUTTONS
+-------------------------------- */
+.my-btn {
+	width: 120px;
+	margin-bottom: 50px;
+}

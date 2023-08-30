@@ -1,0 +1,411 @@
+{% extends 'home.html' %}
+{% load static %}
+
+
+{% block presentation %}
+<div class="containner">
+    <center>
+        <div class="home">
+            <img src="{% static 'image/photo.jpg' %}" width="45" height="45" alt="">
+            <h2>Solution RDC</h2>
+        </div>
+    </center>
+    <h3 class="title-present">Qui Somme Nous ?</h3>
+    <div class="paraf">
+        <p>
+            Nous somme les Etudiants de l'université protestante de Lubumbashi (UPL En sigle)
+            de la faculté des sciences informatiques. Dans le cadre de notre formation, nous sommes appelés a
+             concevoir un projet multidisciplinaire à la fin de chaque année de notre formation. L'objectif est de nous initié dans la recherche
+            scientifique et d'aider notre pays dans le cadre de nouvelle technologie. Ainsi nous vous avons besoin de votre aide
+            en remplissant le formulaire ci-dessous.
+        </p>
+        
+        <p>Ce projet sera dirigé par deux étudiants: <strong>ASIMWE RUSEMEZA Matthieu ET KAZADI KASONGO Franck</strong></p>
+    </div>
+</div>
+<center>
+    
+    <div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="img-as">
+                <img src="{% static 'image/ir_franck.jpg' %}" class="img-fluid" alt="">
+                <div class="card-body">
+                    <p class="card-text">Franck KAZADI</p>
+                    <p class="card-text">Etudiant L1 en Reseaux et Telecoms</p>
+                </div>
+            </div>              
+        </div>
+        <div class="img-as">
+            <div class="col">
+                <img src="{% static 'image/ir_asim.jpg' %}" class="img-fluid" alt="">
+                <div class="card-body">
+                    <p class="card-text">Matthieu ASIMWE</p>
+                    <p class="card-text">Etudiant L1 en Genie Logiciel</p>
+                </div>
+            </div>
+        </div>
+        
+    </div> 
+</div>
+<div class="paraf">
+    <p class="sujet">
+        Notre Sujet:
+       <strong>"Résoudre les problèmes d’électricité, d’eau, de gestion des déchets et d’insécurité grâce à une application informatique utilisant des détecteurs et des capteurs pour surveiller et contrôler ces problèmes en temps réel"</strong>
+    </p>
+</div>
+</center>
+
+
+{% endblock %}
+
+<!-- Block BG Navbar -->
+{% block bg-nav %} 
+
+{% endblock bg-nav %}
+
+<!-- Block Navbar content -->
+{% block nav-content %}
+{% endblock nav-content %}
+
+<!-- Page content -->
+{% block content %}
+
+
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        <h3 class="formulaire">Formulaire</h3>
+        
+        <div class="card p-3 border-dark mt-5 mb-5" style="background-color: rgba(255, 255, 255, 0.5);">
+         
+            {% block Id %}{% endblock Id %}
+            <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Votre Nom" name="name" required {% block Name %}{% endblock Name %}>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="Check-Male" name="gender" value="Masculin" required
+                {% if Candidate.gender == "Masculin" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="Check-Male">Masculin</label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="Check-Female" name="gender" value="Feminin" required
+                {% if Candidate.gender == "Feminin" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="Check-Female">Feminin</label>
+            </div>
+            <div class="mb-3">
+                <select class="form-select" name="ville" required>
+                    {% block Profession %}
+                    <option value="" hidden>Selectionner Votre Ville ou trritoire</option> 
+                    {% endblock Profession %}
+                    <option disabled></option>
+                    <option>Kinshasa</option>
+                    <option>Lubumbashi</option>
+                    <option>Goma</option>
+                    <option>Bunia</option>
+                    <option>Kisagani</option>
+                    <option>Bukavu</option>
+                    <option>Isiro</option>
+                    <option>Buta</option>
+                    <option>Butembo</option>
+                    <option>kolwezi</option>
+                    <option>kamina</option>
+                    <option>likasi</option>
+                    <option>kelemi</option>
+                    <option>Kenge</option>
+                    <option>Kisangani</option>
+                    <option>kikwit</option>
+                    <option>kindu</option>
+                    <option>Uvira</option>
+                    <option>kaniama</option>
+                    <option>Mbndaka</option>
+                    <option>Tshikapa</option>
+                    <option>Matadi</option>
+                    <option>Gbadolite</option>
+                    <option>Zongo</option>
+                    <option>Gemena</option>
+                    <option>Lusambo</option>
+                    <option>Kabinda</option>
+                    <option>Inongo</option>
+                    <option>Bandundu</option>
+                    <option>Beni</option>
+                    <option>Boende</option>
+                    <option>Kindu</option>
+                    <option>Autre</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="card p-3 border-dark mt-5 mb-5">
+            <!--question1-->
+            <p>1. Quelle méthode trouvez-vous bonne pour que la sécurité soit assurée dans votre ville ?</p>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="Check-assersion1" name="assertion1" value="OUI" required
+                {% if Candidate.assertion1 == "OUI" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="Check-assersion1">Répartir les policiers partout dans la ville</label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="Check-assersion" name="assertion1" value="NON"
+                 required {% if Candidate.assertion1 == "NON" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="Check-assersion">
+                    Mettre une technologie au service de la police qui leur permettrait de se localiser en cas d’attaque dans la ville.
+                </label>
+            </div>
+            <!--question2-->
+            <p>2. Avec une technologie d’applications informatiques utilisant de détecteurs et de capteurs à 
+                l’entrée et à la sortie de la ville qui sera chargée de vous alerter de tout danger, la sécurité sera-t-elle assurée ?
+            </p>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="securite1" name="assertion2" value="OUI" required
+                {% if Candidate.assertion2 == "OUI" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="securite1">Oui</label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="securite2" name="assertion2" value="NON" required
+                {% if Candidate.assertion2 == "NON" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="securite2">
+                    Non
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="securite3" name="assertion2" value="np" required
+                {% if Candidate.assertion2 == "np" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="securite3">
+                    Peut être
+                </label>
+            </div>
+        </div>
+            <div class="card p-3 border-dark mt-5 mb-5">
+            <!--question3-->
+
+            <p>
+                3. Comment évaluez-vous la gestion et le niveau de déchets sur les routes et les marchés dans votre ville ?
+            </p>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="dechet1" name="assertion3" value="ass.1" required
+                {% if Candidate.assertion3 == "ass.1" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="dechet1">
+                    La gestion de déchets dans notre ville est inefficace et insuffisante 
+                    ce qui entraine une pollution visuelle, olfactive et sanitaire des routes et des marchés.
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="dechet2" name="assertion3" value="ass.2" required
+                {% if Candidate.assertion3 == "ass.2" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="dechet2">
+                    La gestion de déchets dans notre ville est participative et responsable, ce qui favorise la sensibilisation,
+                    la réduction et le recyclage de déchets par les habitants, les commerçants et les autorités
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="dechet3" name="assertion3" value="ass.3" required
+                {% if Candidate.assertion3 == "ass.3" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="dechet3">
+                    La gestion de déchets dans notre ville est variable selon les quartiers, les types de 
+                    déchets et les acteurs impliques, ce qui crée des inégalités et des contrastes entre les routes et les marchés.
+                </label>
+            </div>
+
+            <!--question4-->
+
+            <p>
+                4. Comment proposez-vous l’utilisation de capteurs et détecteurs dans les rues et les marchés
+                pour envoyer des informations fiables enfin de résoudre le problème de déchets dans la ville.
+            </p>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="dechet-1" name="assertion4" value="ass.1" required
+                {% if Candidate.assertion4 == "ass.3" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="dechet-1">
+                    C’est une bonne idée, car cela pourrait aider à adapter la fréquence et le volume de collecte 
+                    en fonction du niveau de remplissage et de la décomposition de déchets, et ainsi éviter le débordement, 
+                    les nuisances olfactives et les risques sanitaire.
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="dechet-2" name="assertion4" value="ass.2" required
+                {% if Candidate.assertion4 == "ass.3" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="dechet-2">
+                    Je pense que c’est une solution innovante, car cela permettrait de collecter plus efficacement les déchets,
+                     d’améliorer leur qualité et leur traçabilité, et de renforcer la sensibilisation des citoyens au tri sélectif.
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="dechet-3" name="assertion4" value="ass.3" required
+                {% if Candidate.assertion4 == "ass.3" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="dechet-3">
+                    Je crois que ce pas une bonne idée.
+                </label>
+            </div>
+            </div>
+            <div class="card p-3 border-dark mt-5 mb-5">
+
+            <!--question5-->
+
+            <p>
+                5. Trouvez-vous bonne la solution d’application informatique qui permettra de résoudre le problème
+                d’électricitéé en matière de coupure brusque et sans explication nécessaire dans les différentes villes de la RDC ?  
+            </p>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="elec-1" name="assertion5" value="Oui" required
+                {% if Candidate.assertion5 == "Oui" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="elec-1">
+                    Oui
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="elec-2" name="assertion5" value="Non" required
+                {% if Candidate.assertion5 == "Non" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="elec-2">
+                    Non
+                </label>
+            </div>
+
+            <!--question6-->
+
+            <p>
+                6. Combien de temps peut durer une coupure du courant dans votre ville ?  
+            </p>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="electricite-1" name="assertion6" value="ass.1" required
+                {% if Candidate.assertion6 == "ass.1" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="electricite-1">
+                    Environs une heure. 
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="electricite-2" name="assertion6" value="ass.2" required
+                {% if Candidate.assertion6 == "ass.2" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="electricite-2">
+                    Une demi-journée. 
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="electricite-3" name="assertion6" value="ass.3" required
+                {% if Candidate.assertion6 == "ass.3" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="electricite-3">
+                    Une journée.
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="electricite-4" name="assertion6" value="ass.4" required
+                {% if Candidate.assertion6 == "ass.4" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="electricite-4">
+                    Plusieurs jours et de temps en temps. 
+                </label>
+            </div>
+            </div>
+            <div class="card p-3 border-dark mt-5 mb-5">
+
+            <!--question7-->
+
+            <p>
+                7. Quelle est la source principale d’eau potable pour votre ménage ?  
+            </p>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="leau-1" name="assertion7" value="ass.1" required
+                {% if Candidate.assertion7 == "ass.1" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="leau-1">
+                    Robinet public 
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="leau-2" name="assertion7" value="ass.2" required
+                {% if Candidate.assertion7 == "ass.2" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="leau-2">
+                    Puits privé 
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="leau-3" name="assertion7" value="ass.3" required
+                {% if Candidate.assertion7 == "ass.3" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="leau-3">
+                    Puits communautaire
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="leau-4" name="assertion7" value="ass.4" required
+                {% if Candidate.assertion7 == "ass.4" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="leau-4">
+                    Forage
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="leau-5" name="assertion7" value="ass.5" required
+                {% if Candidate.assertion7 == "ass.5" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="leau-5">
+                    Eau de pluie
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="leau-6" name="assertion7" value="ass.6" required
+                {% if Candidate.assertion7 == "ass.6" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="leau-6">
+                    Autre
+                </label>
+            </div>
+
+            <!--question8-->
+
+            <p>
+                8. Est-il mieux d’utiliser une application informatique qui vous permettrait de signaler les 
+                problèmes de panne d’eau sans aller au bureau de REGIDESO ? 
+            </p>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="eau1" name="assertion8" value="Oui" required
+                {% if Candidate.assertion8 == "Oui" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="eau1">
+                    Oui
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="eau2" name="assertion8" value="Non" required
+                {% if Candidate.assertion8 == "Non" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="eau2">
+                    Non
+                </label>
+            </div>
+
+            <!--question9-->
+
+            <p>
+                9. Comment trouvez-vous l'integration de la technologie dans le service de REGIDESO pour surveiller la quantité d’eau au barrage 
+                et détecter s’il Ya des saletés dans l’eau.
+            </p>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="eau-1" name="assertion9" value="Excellent" required
+                {% if Candidate.assertion9 == "Excellent" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="eau-1">
+                    Excellent 
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="eau-2" name="assertion9" value="Moyen" required
+                {% if Candidate.assertion9 == "Moyen" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="eau-2">
+                    Moyen
+                </label>
+            </div>
+            <div class="form-check mb-3">
+                <input type="radio" class="form-check-input" id="eau-3" name="assertion9" value="Nul" required
+                {% if Candidate.assertion9 == "Nul" %} checked {% else %} "" {% endif %}>
+                <label class="form-check-label" for="eau-3">
+                    Nul
+                </label>
+            </div>
+            </div>
+            
+        <hr>
+        
+      
+        {% block button %}
+        <button type="submit" class="btn btn-dark my-btn" type="submit">
+            <i class="fas fa-plus"></i>&nbsp;&nbsp; Envoyé
+        </button>
+        {% endblock button %}
+        
+    </form>
+
+</div> <!-- END // container -->
+
+    
+{% endblock content %}

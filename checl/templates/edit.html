@@ -1,0 +1,38 @@
+{% extends 'add.html' %}
+<style>
+  body{
+    overflow: scroll;
+  }
+</style>
+
+<!-- Block BG Navbar -->
+{% block bg-nav %} navbar-warning bg-warning {% endblock bg-nav %}
+
+<!-- Block Navbar content -->
+{% block nav-content %}
+<i class="fas fa-clock text-dark"></i>&nbsp; <span class="text-dark">
+  Enregister le: {{Candidate.created_at | date:'d/m/Y'}} à {{Candidate.created_at | date:'H:i'}}
+</span>
+{% endblock nav-content %}
+
+<!-- ID -->
+{% block Id %}
+<div class="mb-3">
+  <input type="text" class="form-control" name="id" value="{{Candidate.id}}" readonly="disabled">
+</div>
+{% endblock %}
+
+<!-- ===== Extended <inputs> ===== -->
+{% block Name %} value="{{Candidate.name}}" {% endblock Name %}
+{% block Email %} value="{{Candidate.email}}" {% endblock Email %}
+{% block Profession %}<option>{{Candidate.profession}}</option>{% endblock Profession %}
+{% block Expectation %} value="{{Candidate.expectation}}" {% endblock Expectation %}
+
+{% block Experience %} {% endblock Experience %}
+
+<!-- Button insert denied here -->
+{% block button %} 
+<button type="reset" class="btn btn-dark my-btn">
+<a href="{% url 'home' %}" style="text-decoration: none;" class="text-white"><i class="fas fa-sync-alt"></i>&nbsp;&nbsp; Retour</a>
+</button>
+ {% endblock %}

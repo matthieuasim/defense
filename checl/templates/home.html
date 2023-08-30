@@ -1,0 +1,172 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--CSS Static-->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/css/style.css' %}" rel="stylesheet">
+    <script src="{% static 'JavaScript/app.js' %}"></script>
+    <link href="{% static 'image/photo.jpg' %}" rel="icon">
+    <title>formulaire d'aquete du project</title>
+    <meta name="description" content="formulaire d'aquete du projet multidisciplinaire bac 1 informatique">
+    <style>
+        @font-face {
+        font-family: roboto;
+        src: url("{% static 'font/Roboto-Black.ttf' %}") format("opentype");
+        font-weight: 700;
+        }
+        body{
+            font-family: 'Times New Roman', roboto, Times, serif;
+        }
+        .home{
+            position: fixed;
+            background: #000;
+            color: aliceblue;
+            padding-bottom: -17px;
+            width: 100%;
+            z-index: 2;
+        }
+        .home img{
+            position: relative;
+            left: -100px;
+            top: 18px;
+        }
+        .home h2{
+            position: relative;
+            bottom: 30px;
+            left: 20px;
+            top: -20px;
+        }
+        .paraf{
+            
+            margin: 0 20px;
+            z-index: 1;
+        }
+        .paraf p{
+            text-align: justify;
+        }
+        .img-as{
+            border: 1px solid transparent;
+        }
+        .formulaire{
+            color: rgb(97, 97, 172);
+            font-size: 30px;
+            text-decoration: underline;
+        }
+
+        .img-fluid{
+            animation: asim 5s;
+        }
+        .img-as .card-text{
+            padding-bottom: 12px;
+            padding-top: -12px;
+        }
+        @keyframes asim {
+        from{
+        transform: translateY(200px);
+        opacity: 0;
+        } 
+
+        to{
+        transform: translateY(0);
+        opacity: 1;
+        }
+    
+        }
+        .sujet{
+            padding: 0 10px;
+        }
+
+        .title-present{
+            margin-left: 10px;
+            padding-top: 100px;
+            text-decoration: underline;
+            font-size: 30px;
+            font-weight: bold;
+            color: rgba(0, 0, 0, .6);
+            padding-bottom: 7px;
+        }
+    </style>
+</head>
+<body id="body" style="overflow:scroll; background-color: rgb(255, 255, 255);
+ font-size: 50pxpx; font-weight: bold; font-size: 20px; ">
+{% block succes %}
+
+{% endblock %}
+{% block presentation %}
+
+{% endblock %}
+
+    <div class="wrapper">
+        <header>
+            <nav class="navbar navbar-expand-lg {% block bg-nav %} navbar-dark bg-dark {% endblock bg-nav %}">
+                <a class="navbar-brand flex-grow-1 text-center">
+                    {% block nav-content %}
+                    <i class="fas fa-home"></i>&nbsp; RESULTATS DE RECOLTE DE DONNEES
+                    {% endblock nav-content %}
+                </a>
+            </nav>
+        </header>
+{%  for message in messages %}
+<h3 style="color: rgb(17, 154, 17);"> {{ message }}</h3>
+{% endfor %}
+        
+
+        {% block content %}
+        <div class="input-group mb-3 mt-5" style="margin-left: 10%;">
+        </div>
+        
+        <center>
+            <table class="table table-bordered text-center" style="width: 97%;">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Ville</th>
+                        <th>Genre</th>
+                        <th>Q 1</th>
+                        <th>Q 2</th>
+                        <th>Q 3</th>
+                        <th>Q 4</th>
+                        <th>Q 5</th>
+                        <th>Q 6</th>
+                        <th>Q 7</th>
+                        <th>Q 8</th>
+                        <th>Q 9</th>
+                        <th class="bg-warning text-dark" style="width: 5%;">Voir</th>
+                    </tr>
+                </thead>
+
+                <!-- Dados vindos do BD -->
+                {% for candidate in candidates %}
+                <tr>
+                    <td>{{candidate.id}}</td>
+                    <td>{{candidate.name}}</td>
+                    <td>{{candidate.ville}}</td>
+                    <td>{{candidate.gender}}</td>
+                    <td>{{candidate.assertion1}}</td>
+                    <td>{{candidate.assertion2}}</td>
+                    <td>{{candidate.assertion3}}</td>
+                    <td>{{candidate.assertion4}}</td>
+                    <td>{{candidate.assertion5}}</td>
+                    <td>{{candidate.assertion6}}</td>
+                    <td>{{candidate.assertion7}}</td>
+                    <td>{{candidate.assertion8}}</td>
+                    <td>{{candidate.assertion9}}</td>
+                    <td>
+                        <a href="edit/{{candidate.id}}"class="btn btn-warning">
+                            <i class="fas fa-eye"><img src="{% static 'image/eye.svg' %}" alt=""></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </center>
+        {% endblock content %}
+    </div>
+
+</body>
+</html>
